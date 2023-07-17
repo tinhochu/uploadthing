@@ -54,10 +54,11 @@ export const uploadFileFromUrl = async (
   formData.append("files", blob, filename);
   formData.append("metadata", JSON.stringify(metadata));
 
-  return uploadFilesInternal(formData, {
+  const uploadedFiles = await uploadFilesInternal(formData, {
     apiKey: UT_SECRET,
     utVersion: UPLOADTHING_VERSION,
-  }).then((files) => files[0]);
+  });
+  return uploadedFiles[0];
 };
 
 /**
